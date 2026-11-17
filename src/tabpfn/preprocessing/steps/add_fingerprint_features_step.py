@@ -95,6 +95,9 @@ class AddFingerprintFeaturesStep(PreprocessingStep):
             if isinstance(X_to_hash, torch.Tensor)
             else X_to_hash
         )
+        # The pipeline supplies this reference only for the current transform.
+        # Do not retain the full input batch on the fitted estimator.
+        self.original_input_ = None
 
         # Round once for all rows instead of per-row
         X_rounded = np.ascontiguousarray(

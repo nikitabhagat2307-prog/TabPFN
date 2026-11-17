@@ -86,6 +86,8 @@ def test__transform__fingerprint_uses_original_input() -> None:
     step.set_original_input(original)
     _, fingerprints_from_transformed, _ = step._transform(transformed, is_test=True)
 
+    assert step.original_input_ is None
+
     reference = AddFingerprintFeaturesStep()
     reference._fit(original, schema)
     _, fingerprints_from_original, _ = reference._transform(original, is_test=True)
